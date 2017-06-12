@@ -2,7 +2,7 @@
 # -*- python -*-
 # -*- coding: utf-8 -*-
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 __author__ = 'Jüri Kormik'
 
@@ -27,15 +27,10 @@ else:
         puc.settings["lang"] = "en"
 
 
-# Import language file
-lng = getattr(__import__("lang." + puc.settings["lang"]), puc.settings["lang"])
-
-
 if __name__ == "__main__":
     # Set some global variables
     puc.__version__ = __version__
-    puc.lang = lng.lang
-    puc.messages = lng.messages
+    puc.load_lang()
 
     # Run the program
     puc.run()
