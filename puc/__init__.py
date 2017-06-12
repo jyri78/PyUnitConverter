@@ -50,6 +50,8 @@ try:
 except: pass
 
 
+from glob import glob
+
 # Python 2 and 3
 from io import open
 from os.path import exists
@@ -62,7 +64,7 @@ from puc.statusbar import *
 from puc.program import *
 
 
-(SM_NONE, SM_JSON, SM_PICKLE) = (-1, 0, 1)
+SM_NONE, SM_JSON, SM_PICKLE = -1, 0, 1
 lang = {}
 messages = {}
 settings = {}
@@ -84,6 +86,19 @@ try:
     json.dumps('\u0020')
     saving_modes[SM_JSON] = True
 except: pass
+
+
+# ==============================================================================
+# Functions for loading language file
+# ==============================================================================
+
+def load_lang():
+    global lang, messages
+
+    # Import language file
+    lng = getattr(__import__("lang." + puc.settings["lang"]), puc.settings["lang"])
+    lang = lng.lang
+    messages = lng.messages
 
 
 # ==============================================================================
