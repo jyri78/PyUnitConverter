@@ -76,6 +76,15 @@ class Program(puc.Tk):
         """
         return self.frames[contr]
 
+
+    def change_lang(self, evt):
+        puc.settings["lang"] = self.frames[puc.Main].cmbLang.get()
+        puc.load_lang()
+
+        for F in self.frames:
+            self.frames[F].change_lang()
+
+
     def save_data(self):
         """Saves data to the file."""
         puc.save_data(puc.datafile, self.data)
