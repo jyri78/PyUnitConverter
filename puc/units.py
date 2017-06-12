@@ -27,18 +27,18 @@ class Units(puc.Frame):
         # Units list (label, combobox, entry/textbox, button)
         # ----------------------------------------------------------------------
 
-        lblTitle = puc.Label(
+        self.lblTitle = puc.Label(
             self,
             text = puc.messages["program.title"] + "  –  "
                     + puc.messages["main.button.units"].lower(),
             style = "LMT.TLabel")
 
-        lblUnitsList = puc.Label(self, text=puc.messages["units.label.units_list"])
+        self.lblUnitsList = puc.Label(self, text=puc.messages["units.label.units_list"])
         self.cmbUnitsList = puc.Combobox(self, state="readonly")
         self.cmbUnitsList.bind("<<ComboboxSelected>>", self.units_list_selected)
         self.txtUnitsList = puc.Entry(self)
 
-        lblBaseUnit = puc.Label(self, text=puc.messages["units.label.base"])
+        self.lblBaseUnit = puc.Label(self, text=puc.messages["units.label.base"])
         self.txtBaseUnit = puc.Entry(self)
 
         # Enables/Disables adding button based on length of inputboxes
@@ -69,11 +69,11 @@ class Units(puc.Frame):
         # Units and multiplier
         # ----------------------------------------------------------------------
 
-        lblConverter = puc.Label(self,
-                                 text = puc.messages["units.label.converter"],
-                                 font = (None, 10, "bold"))
+        self.lblConverter = puc.Label(self,
+                                      text = puc.messages["units.label.converter"],
+                                      font = (None, 10, "bold"))
 
-        lblUnit = puc.Label(self, text=puc.messages["units.label.unit"])
+        self.lblUnit = puc.Label(self, text=puc.messages["units.label.unit"])
         self.cmbUnits = puc.Combobox(self, state="readonly")
         self.cmbUnits.bind("<<ComboboxSelected>>", self.unit_selected)
 
@@ -95,7 +95,7 @@ class Units(puc.Frame):
         # Allow `Enter`-key in entry/textbox
         self.txtUnit.bind("<Return>", lambda evt: self.btnAddUnit.invoke())
 
-        lblMultiplier = puc.Label(self, text=puc.messages["units.label.multiplier"])
+        self.lblMultiplier = puc.Label(self, text=puc.messages["units.label.multiplier"])
         self.txtMultiplier = puc.Entry(self)
         self.txtMultiplier.state(["disabled"])
 
@@ -127,21 +127,21 @@ class Units(puc.Frame):
                                   command = self.save_data)
         self.btnSave.state(["disabled"])
 
-        btnCancel = puc.Button(self, text = puc.messages["button.cancel"],
-                               command = self.cancel)
+        self.btnCancel = puc.Button(self, text = puc.messages["button.cancel"],
+                                    command = self.cancel)
 
 
         # ----------------------------------------------------------------------
         # Put units list elements to the frame
         # ----------------------------------------------------------------------
 
-        lblTitle.grid(row=0, column=0, columnspan=5, sticky="nw", padx=10, pady=15)
-        lblUnitsList.grid(row=1, column=0, sticky="w", pady=5)
+        self.lblTitle.grid(row=0, column=0, columnspan=5, sticky="nw", padx=10, pady=15)
+        self.lblUnitsList.grid(row=1, column=0, sticky="w", pady=5)
         self.cmbUnitsList.grid(row=1, column=1, padx=10)
         self.txtUnitsList.grid(row=1, column=2)
         self.btnAddUnitsList.grid(row=1, column=3, padx=10, rowspan=2)
 
-        lblBaseUnit.grid(row=2, column=1)
+        self.lblBaseUnit.grid(row=2, column=1)
         self.txtBaseUnit.grid(row=2, column=2)
 
 
@@ -149,14 +149,14 @@ class Units(puc.Frame):
         # Put units elements to the frame
         # ----------------------------------------------------------------------
 
-        lblConverter.grid(row=3, column=0, columnspan=2, sticky="w", pady=10)
+        self.lblConverter.grid(row=3, column=0, columnspan=2, sticky="w", pady=10)
 
-        lblUnit.grid(row=4, column=0, sticky="w")
+        self.lblUnit.grid(row=4, column=0, sticky="w")
         self.cmbUnits.grid(row=4, column=1, padx=10)
         self.txtUnit.grid(row=4, column=2)
         self.btnAddUnit.grid(row=4, column=3, padx=10)
 
-        lblMultiplier.grid(row=5, column=0, sticky="w")
+        self.lblMultiplier.grid(row=5, column=0, sticky="w")
         self.txtMultiplier.grid(row=5, column=1, sticky="w", padx=10, pady=5)
         self.btnAddMultiplier.grid(row=5, column=2, pady=5)
 
@@ -166,13 +166,33 @@ class Units(puc.Frame):
         # ----------------------------------------------------------------------
 
         self.btnSave.grid(row=6, column=2, padx=20, pady=20)
-        btnCancel.grid(row=6, column=3, padx=20, pady=20, sticky="se")
+        self.btnCancel.grid(row=6, column=3, padx=20, pady=20, sticky="se")
 
         # Reset units list combobox
         self.controller.set_selections(self.unit_lists, self.cmbUnitsList, self.controller.data)
         if controller.df_exists:
             self.cmbUnitsList.current(0) # select first element
             self.units_list_selected("")
+
+
+    # --------------------------------------------------------------------------
+    # Method for changing frame language
+    # --------------------------------------------------------------------------
+
+    def change_lang(self):
+        self.lblTitle.config(text = puc.messages["program.title"] + "  –  "
+                    + puc.messages["main.button.units"].lower())
+
+        self.lblUnitsList.config(text = puc.messages["units.label.units_list"])
+        self.lblBaseUnit.config(text = puc.messages["units.label.base"])
+        self.btnAddUnitsList.config(text = puc.messages["button.add"])
+        self.lblConverter.config(text = puc.messages["units.label.converter"])
+        self.lblUnit.config(text = puc.messages["units.label.unit"])
+        self.btnAddUnit.config(text = puc.messages["button.add"])
+        self.lblMultiplier.config(text = puc.messages["units.label.multiplier"])
+        self.btnAddMultiplier.config(text = puc.messages["button.change"])
+        self.btnSave.config(text = puc.messages["units.button.save"])
+        self.btnCancel.config(text = puc.messages["button.cancel"])
 
 
     # --------------------------------------------------------------------------
