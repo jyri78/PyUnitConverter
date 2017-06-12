@@ -28,13 +28,13 @@ class Converter(puc.Frame):
         # Units List (label, combobox, entry/textbox, button)
         # ----------------------------------------------------------------------
 
-        lblTitle = puc.Label(
+        self.lblTitle = puc.Label(
             self,
             text = puc.messages["program.title"] + "  –  "
                     + puc.messages["main.button.convert"].lower(),
             style = "LMT.TLabel")
 
-        lblUnitsList = puc.Label(self, text=puc.messages["units.label.units_list"])
+        self.lblUnitsList = puc.Label(self, text=puc.messages["units.label.units_list"])
         self.cmbUnitsList = puc.Combobox(self, state="readonly")
         self.cmbUnitsList.bind("<<ComboboxSelected>>", self.units_list_selected)
 
@@ -43,9 +43,9 @@ class Converter(puc.Frame):
         # Conversion (label, combobox, entry/textbox, button)
         # ----------------------------------------------------------------------
 
-        lblConverter = puc.Label(self,
-                                 text = puc.messages["units.label.converter"],
-                                 font = (None, 10, "bold"))
+        self.lblConverter = puc.Label(self,
+                                      text = puc.messages["units.label.converter"],
+                                      font = (None, 10, "bold"))
 
         self.txtMultiplier = puc.Entry(self, width=5)
         self.txtMultiplier.insert(0, "1")
@@ -73,19 +73,19 @@ class Converter(puc.Frame):
                                   text = puc.messages["converter.button.calc"],
                                   command = self.calc)
 
-        btnCancel = puc.Button(self, text = puc.messages["button.cancel"],
-                               command= lambda: controller.show_frame(puc.Main))
+        self.btnCancel = puc.Button(self, text = puc.messages["button.cancel"],
+                                    command= lambda: controller.show_frame(puc.Main))
 
 
         # ----------------------------------------------------------------------
         # Put labels, coboboxes and entry/textbox to the frame
         # ----------------------------------------------------------------------
 
-        lblTitle.grid(row=0, column=0, columnspan=6, sticky="nw", padx=10, pady=15)
-        lblUnitsList.grid(row=1, column=0, columnspan=2, sticky="w", pady=5)
+        self.lblTitle.grid(row=0, column=0, columnspan=6, sticky="nw", padx=10, pady=15)
+        self.lblUnitsList.grid(row=1, column=0, columnspan=2, sticky="w", pady=5)
         self.cmbUnitsList.grid(row=1, column=2, columnspan=2, padx=10)
 
-        lblConverter.grid(row=2, column=0, columnspan=3, sticky="w", pady=10)
+        self.lblConverter.grid(row=2, column=0, columnspan=3, sticky="w", pady=10)
 
         self.txtMultiplier.grid(row=3, column=0)
         self.cmbTo.grid(row=3, column=1, columnspan=2, padx=10)
@@ -94,12 +94,12 @@ class Converter(puc.Frame):
         self.cmbFrom.grid(row=3, column=5, padx=10, pady=5)
 
 
-        # ---------------------------------------------------------------------
+        # ----------------------------------------------------------------------
         # Put buttons to the frame
-        # ---------------------------------------------------------------------
+        # ----------------------------------------------------------------------
 
         self.btnCalc.grid(row=4, column=3, columnspan=2, pady=10)
-        btnCancel.grid(row=5, column=5, padx=5, pady=20, sticky="se")
+        self.btnCancel.grid(row=5, column=5, padx=5, pady=20, sticky="se")
 
         # Reset units list combobox
         self.reset_units_list()
@@ -108,9 +108,23 @@ class Converter(puc.Frame):
             self.units_list_selected("")
 
 
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
+    # Method for changing frame language
+    # --------------------------------------------------------------------------
+
+    def change_lang(self):
+        self.lblTitle.config(text = puc.messages["program.title"] + "  –  "
+                    + puc.messages["main.button.convert"].lower())
+
+        self.lblUnitsList.config(text = puc.messages["units.label.units_list"])
+        self.lblConverter.config(text = puc.messages["units.label.converter"])
+        self.btnCalc.config(text = puc.messages["converter.button.calc"])
+        self.btnCancel.config(text = puc.messages["button.cancel"])
+
+
+    # --------------------------------------------------------------------------
     # Method for calculation
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
 
     def calc(self):
         """Make calculation based on selected unit and multiplier."""
@@ -127,17 +141,19 @@ class Converter(puc.Frame):
             self.lblResult["text"] = puc.float2text(round(mult*to/frm, 5))
 
 
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     # Methods for comboboxes
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
 
     def reset_units_list(self):
         """Resets units list combobox."""
-        self.controller.set_selections(self.unit_lists, self.cmbUnitsList, self.controller.data)
+        self.controller.set_selections(self.unit_lists, self.cmbUnitsList,
+                                       self.controller.data)
 
     def units_list_selected(self, evt):
         """Unit list selection (resets units combobox)."""
-        self.controller.make_selection(self.selected_list, self.cmbUnitsList, "status.selected_list", evt=="")
+        self.controller.make_selection(self.selected_list, self.cmbUnitsList,
+                                       "status.selected_list", evt=="")
         self.reset_units()
 
 
