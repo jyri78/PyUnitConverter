@@ -137,7 +137,7 @@ def text2float(txt: str) -> float:
     If text is not number, then returns `0.0`
     """
     try:
-        return float(txt.replace(",", "."))
+       return float(txt.replace(",", "."))
     except:
         return 0.0
 
@@ -160,7 +160,7 @@ def run():
     db_filename = settings["db_filename"]
 
     # Set datafile full name
-    if saving_modes[SM_JSON] or saving_modes[SM_PICKLE]:
+    if saving_modes[settings["saving_mode"]] :
         datafile = db_filename + db_file_ver \
                 + messages["program.ext"][settings["saving_mode"]]
 
