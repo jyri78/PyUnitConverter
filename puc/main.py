@@ -11,11 +11,13 @@ class Main(puc.Frame):
         puc.Frame.__init__(self, parent)
 
         self.lblTitle = puc.Label(self, text = puc.messages["program.title"],
-                                  style="LMT.TLabel")
+                                  style="PUCT.TLabel")
 
         self.cmbLang = puc.Combobox(self, state="readonly", width=2)
         self.cmbLang.bind("<<ComboboxSelected>>", controller.change_lang)
         self.get_langs()
+
+        self.lblLang = puc.Label(self, text = puc.lang["lang"], style="PUCL.TLabel")
 
         self.btnConvert = puc.Button(
             self,
@@ -48,11 +50,12 @@ class Main(puc.Frame):
         self.btnConvert.state(["!disabled" if controller.df_exists else "disabled"])
 
         # Finally show labels and buttons (adds to the grid)
-        self.lblTitle.grid(row=0, column=0, columnspan=3, padx=10, pady=15, sticky="nw")
-        self.cmbLang.grid(row=0, column=3, padx=20, pady=15, sticky="ne")
-        self.btnConvert.grid(row=1, column=0, padx=10, pady=5)
-        self.btnUnits.grid(row=1, column=1, padx=10, pady=5)
-        self.btnSave.grid(row=1, column=3, padx=20, pady=5)
+        self.lblTitle.grid(row=0, column=0, columnspan=3, padx=10, pady=10, sticky="nw")
+        self.cmbLang.grid(row=0, column=3, padx=20, sticky="se")
+        self.lblLang.grid(row=1, column=3, padx=20, sticky="ne")
+        self.btnConvert.grid(row=2, column=0, padx=10, pady=15)
+        self.btnUnits.grid(row=2, column=1, padx=10, pady=15)
+        self.btnSave.grid(row=2, column=3, padx=20, pady=15)
         self.btnAbout.grid(row=3, column=1, padx=10, pady=35, sticky="se")
         self.btnClose.grid(row=3, column=3, padx=20, pady=35, sticky="se")
 
@@ -67,6 +70,7 @@ class Main(puc.Frame):
 
     def change_lang(self):
         self.lblTitle.config(text = puc.messages["program.title"])
+        self.lblLang.config(text = puc.lang["lang"])
         self.btnConvert.config(text = puc.messages["main.button.convert"])
         self.btnUnits.config(text = puc.messages["main.button.units"])
         self.btnSave.config(text = puc.messages["main.button.save"])
