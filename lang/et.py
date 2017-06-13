@@ -3,7 +3,7 @@
 # -*- coding: utf-8 -*-
 
 lang = {
-    "lang": "et",  # same as filename
+    "lang": "estonian",  # should be in english
     "flPoint_comma": True,  # floating point symbol is `,` instead `.`
     "translator": "Jüri Kormik"
     }
