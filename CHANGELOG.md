@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.2] - 2017-06-13
+### Added
+- Active language name to the main frame.
+
+### Fixed
+- Logical error in function `run()`.
+
 ## [1.0.1] - 2017-06-12
 ### Added
 - Ability to change program language in main frame (saves automatically).
