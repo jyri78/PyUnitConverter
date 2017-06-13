@@ -32,7 +32,7 @@ class Converter(puc.Frame):
             self,
             text = puc.messages["program.title"] + "  –  "
                     + puc.messages["main.button.convert"].lower(),
-            style = "LMT.TLabel")
+            style = "PUCT.TLabel")
 
         self.lblUnitsList = puc.Label(self, text=puc.messages["units.label.units_list"])
         self.cmbUnitsList = puc.Combobox(self, state="readonly")
