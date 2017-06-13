@@ -12,8 +12,12 @@ class Program(puc.Tk):
         puc.Tk.__init__(self, *args, **kwargs)
 
         # Create style for titles in frames
-        puc.Style().configure("LMT.TLabel", foreground="darkgreen",
+        puc.Style().configure("PUCT.TLabel", foreground="darkgreen",
                               font = (None, 13, "bold"))
+
+        # Create style for language name in main frame
+        puc.Style().configure("PUCL.TLabel", foreground="blue",
+                              font = (None, 9, "italic"))
 
         # Set program titlebar title and icon
         # (ignore icon load error, not mandatory)
