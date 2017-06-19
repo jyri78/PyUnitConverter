@@ -35,7 +35,7 @@ class Converter(puc.Frame):
             style = "PUCT.TLabel")
 
         self.lblUnitsList = puc.Label(self, text=puc.messages["units.label.units_list"])
-        self.cmbUnitsList = puc.Combobox(self, state="readonly")
+        self.cmbUnitsList = puc.Combobox(self, state="readonly", width=15)
         self.cmbUnitsList.bind("<<ComboboxSelected>>", self.units_list_selected)
 
 
@@ -89,7 +89,7 @@ class Converter(puc.Frame):
 
         self.txtMultiplier.grid(row=3, column=0)
         self.cmbTo.grid(row=3, column=1, columnspan=2, padx=10)
-        puc.Label(self, text="=").grid(row=3, column=3)
+        puc.Label(self, text="=").grid(row=3, column=3, padx=3)
         self.lblResult.grid(row=3, column=4, pady=5)
         self.cmbFrom.grid(row=3, column=5, padx=10, pady=5)
 
@@ -98,8 +98,8 @@ class Converter(puc.Frame):
         # Put buttons to the frame
         # ----------------------------------------------------------------------
 
-        self.btnCalc.grid(row=4, column=3, columnspan=2, pady=10)
-        self.btnCancel.grid(row=5, column=5, padx=5, pady=20, sticky="se")
+        self.btnCalc.grid(row=4, column=3, columnspan=2, pady=10, sticky="ew")
+        self.btnCancel.grid(row=5, column=5, padx=10, pady=20, sticky="se")
 
         # Reset units list combobox
         self.reset_units_list()
