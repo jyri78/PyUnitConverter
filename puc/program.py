@@ -35,6 +35,7 @@ class Program(puc.Tk):
         # Set some variables needed in program
         self.df_exists = puc.exists(puc.datafile)
         self.data = {}
+        self.u_langs = {}
         self.frames = {}
         self.unsaved = False
 
@@ -51,7 +52,18 @@ class Program(puc.Tk):
         # datafile message
         if self.df_exists:
             self.data = puc.read_data(puc.datafile)
+
+            # If database file version >1, then make some conversions
+            if puc.db_file_ver[-1:] != "":
+                self.u_langs["lang"] = self.data["units_lang"]
+                self.u_langs["translations"] = self.data["translations"]
+                self.data = self.data["units"]
         else:
+            if puc.db_file_ver[-1:] != "":
+                self.u_langs = {
+                    "units_lang": puc.settings["lang"],
+                    "translations": {}}
+
             self.statusbar.set_status(puc.messages["status.no_datafile"])
 
         # Load all frames in to variable
@@ -91,7 +103,15 @@ class Program(puc.Tk):
 
     def save_data(self):
         """Saves data to the file."""
-        puc.save_data(puc.datafile, self.data)
+        if puc.db_file_ver[-1:] != "":
+            data = {
+                "units_lang": self.u_langs["lang"],
+                "units": self.data,
+                "translations": self.u_langs[""]}
+        else:
+            data = self.data
+
+        puc.save_data(puc.datafile, data)
         self.unsaved = False  # datafile saved
         self.frames[puc.Main].btnSave.state(["disabled"])
         self.frames[puc.Units].btnSave.state(["disabled"])
