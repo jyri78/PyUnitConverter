@@ -53,11 +53,18 @@ class Main(puc.Frame):
         self.lblTitle.grid(row=0, column=0, columnspan=3, padx=10, pady=10, sticky="nw")
         self.cmbLang.grid(row=0, column=3, padx=20, sticky="se")
         self.lblLang.grid(row=1, column=3, padx=20, sticky="ne")
-        self.btnConvert.grid(row=2, column=0, padx=10, pady=15)
-        self.btnUnits.grid(row=2, column=1, padx=10, pady=15)
-        self.btnSave.grid(row=2, column=3, padx=20, pady=15)
-        self.btnAbout.grid(row=3, column=1, padx=10, pady=35, sticky="se")
+        self.btnConvert.grid(row=2, column=0, padx=10, pady=15, sticky="we")
+        self.btnUnits.grid(row=2, column=1, padx=10, pady=15, sticky="we")
+        self.btnSave.grid(row=2, column=3, padx=20, pady=15, sticky="we")
+        self.btnAbout.grid(row=3, column=1, padx=10, pady=35, sticky="swe")
         self.btnClose.grid(row=3, column=3, padx=20, pady=35, sticky="se")
+
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+        self.columnconfigure(2, weight=1)
+        self.columnconfigure(3, weight=1)
+        self.columnconfigure(4, weight=1)
+
 
     def get_langs(self):
         out = []
