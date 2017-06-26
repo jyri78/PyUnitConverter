@@ -15,7 +15,8 @@ class Main(puc.Frame):
 
         self.cmbLang = puc.Combobox(self, state="readonly", width=2)
         self.cmbLang.bind("<<ComboboxSelected>>", controller.change_lang)
-        self.get_langs()
+        self.cmbLang["values"] = puc.langs
+        self.cmbLang.set(puc.settings["lang"])
 
         self.lblLang = puc.Label(self, text = puc.lang["lang"], style="PUCL.TLabel")
 
@@ -65,15 +66,6 @@ class Main(puc.Frame):
         self.columnconfigure(3, weight=1)
         self.columnconfigure(4, weight=1)
 
-
-    def get_langs(self):
-        out = []
-        langs = puc.glob("./lang/*.py")
-        for l in langs:
-            # Accept only two letter languages
-            out += [l[-5:-3]]
-        self.cmbLang["values"] = sorted(out)
-        self.cmbLang.set(puc.settings["lang"])
 
     def change_lang(self):
         self.lblTitle.config(text = puc.messages["program.title"])
