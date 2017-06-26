@@ -156,7 +156,7 @@ class Program(puc.Tk):
         # Finally adds sorted list to the combobox
         combo["values"] = sorted(selections)
 
-    def make_selection(self, selection: list, combo: puc.Combobox,
+    def make_selection(self, selection: dict, sel: str, combo: puc.Combobox,
                        status_text: str, no_status = False):
         """Saves user selection and informs in statusbar if allowed.
 
@@ -166,6 +166,6 @@ class Program(puc.Tk):
             status_text: text to show in statusbar
             no_status: don't add text to the statusbar
         """
-        selection[0] = combo.get()
+        selection[sel] = combo.get()
         if not no_status:
-            self.statusbar.set_status(puc.messages[status_text] + selection[0].lower())
+            self.statusbar.set_status(puc.messages[status_text] + selection[sel].lower())
