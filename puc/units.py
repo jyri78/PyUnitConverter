@@ -180,6 +180,7 @@ class Units(puc.Frame):
     # --------------------------------------------------------------------------
 
     def change_lang(self):
+        '''Changes frames language.'''
         self.lblTitle.config(text = puc.messages["program.title"] + "  –  "
                     + puc.messages["main.button.units"].lower())
 
