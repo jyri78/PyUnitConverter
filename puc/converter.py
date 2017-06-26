@@ -8,6 +8,7 @@ import puc
 
 
 class Converter(puc.Frame):
+    """Converter frame object class."""
     def __init__(self, parent: puc.Frame, controller: puc.Tk):
         puc.Frame.__init__(self, parent)
 
@@ -18,10 +19,8 @@ class Converter(puc.Frame):
         self.unit_tos = []
         self.unit_froms = []
 
-        # Variables for remembering selection; list is used for it's mutability
-        self.selected_list = [None]
-        self.selected_to = [None]
-        self.selected_from = [None]
+        # Variable for remembering selections
+        self.selected = {"list": None, "to": None, "from": None}
 
 
         # ----------------------------------------------------------------------
@@ -129,15 +128,15 @@ class Converter(puc.Frame):
     def calc(self):
         """Make calculation based on selected unit and multiplier."""
         # Make calculation only then, if both (from and to) units selected
-        if self.selected_to[0] and self.selected_from[0]:
+        if self.selected["to"] and self.selected["from"]:
             mult = puc.text2float(self.txtMultiplier.get().strip())
             if mult == 0:
                 mult = 1
                 self.txtMultiplier.delete(0, puc.END)
                 self.txtMultiplier.insert(0, puc.float2text(mult))
 
-            to = self.controller.data[self.selected_list[0]][self.selected_to[0]]
-            frm = self.controller.data[self.selected_list[0]][self.selected_from[0]]
+            to = self.controller.data[self.selected["list"]][self.selected["to"]]
+            frm = self.controller.data[self.selected["list"]][self.selected["from"]]
             self.lblResult["text"] = puc.float2text(round(mult*to/frm, 5))
 
 
@@ -152,7 +151,7 @@ class Converter(puc.Frame):
 
     def units_list_selected(self, evt):
         """Unit list selection (resets units combobox)."""
-        self.controller.make_selection(self.selected_list, self.cmbUnitsList,
+        self.controller.make_selection(self.selected, "list", self.cmbUnitsList,
                                        "status.selected_list", evt=="")
         self.reset_units()
 
@@ -161,25 +160,25 @@ class Converter(puc.Frame):
         """Resets units combobox based on selected list."""
         self.cmbTo.set("")
         self.cmbTo.current(None)
-        self.selected_to[0] = None
+        self.selected["to"] = None
         self.cmbFrom.set("")
         self.cmbFrom.current(None)
-        self.selected_from[0] = None
+        self.selected["from"] = None
 
         self.controller.set_selections(self.unit_tos, self.cmbTo,
-                                       self.controller.data[self.selected_list[0]])
+                                       self.controller.data[self.selected["list"]])
 
         self.controller.set_selections(self.unit_froms, self.cmbFrom,
-                                       self.controller.data[self.selected_list[0]])
+                                       self.controller.data[self.selected["list"]])
 
     def to_selected(self, evt):
         """To unit selection (make calculation automatically)."""
-        self.controller.make_selection(self.selected_to, self.cmbTo,
+        self.controller.make_selection(self.selected, "to", self.cmbTo,
                                        "status.selected_to", evt=="")
         self.calc()
 
     def from_selected(self, evt):
         """From unit selection (make calculation automatically)."""
-        self.controller.make_selection(self.selected_from, self.cmbFrom,
+        self.controller.make_selection(self.selected, "from", self.cmbFrom,
                                        "status.selected_from", evt=="")
         self.calc()
