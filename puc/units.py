@@ -8,6 +8,7 @@ import puc
 
 
 class Units(puc.Frame):
+    """Units frame object class."""
     def __init__(self, parent: puc.Frame, controller: puc.Tk):
         puc.Frame.__init__(self, parent)
 
@@ -18,9 +19,8 @@ class Units(puc.Frame):
         self.unit_lists = []
         self.units = []
 
-        # Variables for remembering selection; list is used for it's mutability
-        self.selected_list = [None]
-        self.selected_unit = [None]
+        # Variable for remembering selections
+        self.selected = {"list": None, "unit": None}
 
 
         # ----------------------------------------------------------------------
@@ -105,8 +105,8 @@ class Units(puc.Frame):
             "<KeyRelease>",
             lambda evt: self.btnAddMultiplier.state([
                 "!disabled" if len(self.txtMultiplier.get().strip()) > 0
-                        and self.selected_unit[0].lower()
-                        != self.controller.data[self.selected_list[0]]["base_unit"]
+                        and self.selected["unit"].lower()
+                        != self.controller.data[self.selected["list"]]["base_unit"]
                     else "disabled"
             ]))
 
@@ -253,7 +253,7 @@ class Units(puc.Frame):
 
     def units_list_selected(self, evt):
         """Takes some actions on units list selection."""
-        self.controller.make_selection(self.selected_list, self.cmbUnitsList,
+        self.controller.make_selection(self.selected, "list", self.cmbUnitsList,
                                        "status.selected_list", evt=="")
 
         self.reset_units()
@@ -261,7 +261,7 @@ class Units(puc.Frame):
 
         self.txtBaseUnit.insert(
             0,
-            self.controller.data[self.selected_list[0]]["base_unit"])
+            self.controller.data[self.selected["list"]]["base_unit"])
 
         # Disable multiplier input since unit is now not selected
         self.disable_multiplier()
@@ -281,7 +281,7 @@ class Units(puc.Frame):
         self.txtUnit.delete(0, puc.END)
         self.txtUnit.insert(0, base)
         self.add_unit()
-        self.controller.data[self.selected_list[0]][self.selected_unit[0]] = 1.0
+        self.controller.data[self.selected_["list"]][self.selected["unit"]] = 1.0
         self.txtMultiplier.delete(0, puc.END)
         self.txtMultiplier.insert(0, "1,0" if puc.lang["flPoint_comma"] else "1.0")
 
@@ -296,13 +296,13 @@ class Units(puc.Frame):
         self.cmbUnits.current(None)
 
         self.controller.set_selections(self.units, self.cmbUnits,
-                                       self.controller.data[self.selected_list[0]])
+                                       self.controller.data[self.selected["list"]])
 
         self.txtUnit.state(["!disabled"])
 
     def unit_selected(self, evt):
         """Takes some actions on unit selection."""
-        self.controller.make_selection(self.selected_unit, self.cmbUnits,
+        self.controller.make_selection(self.selected, "unit", self.cmbUnits,
                                        "status.selected_unit", evt=="")
 
         # Update multiplier input value
@@ -311,13 +311,13 @@ class Units(puc.Frame):
         self.txtMultiplier.insert(
             0,
             puc.float2text(
-                self.controller.data[self.selected_list[0]][self.selected_unit[0]]
+                self.controller.data[self.selected["list"]][self.selected["unit"]]
             ))
 
     def add_unit(self):
         """Adds new unit to the combobox."""
         self.add_selection(self.txtUnit,
-                           self.controller.data[self.selected_list[0]],
+                           self.controller.data[self.selected["list"]],
                            self.units, self.cmbUnits,
                            self.btnAddUnit, "unit", 0)
 
@@ -331,7 +331,7 @@ class Units(puc.Frame):
     def add_multiplier(self):
         """Adds/Changes unit multiplier in database."""
         flt = puc.text2float(self.txtMultiplier.get())
-        self.controller.data[self.selected_list[0]][self.selected_unit[0]] = flt
+        self.controller.data[self.selected["list"]][self.selected["unit"]] = flt
 
         # Adjusts inputs value
         s_number = puc.float2text(flt)
