@@ -19,9 +19,9 @@ __all__ = ["messages", "read_data", "save_data", "text2float", "float2text", "ru
 
 
 try:
-    from tkinter import Tk, TkVersion, Frame, X, END
+    from tkinter import Tk, TkVersion, Frame, Listbox, X, END, VERTICAL, SINGLE
 except ImportError:
-    from Tkinter import Tk, TkVersion, Frame, X, END
+    from Tkinter import Tk, TkVersion, Frame, Listbox, X, END, VERTICAL, SINGLE
 try:
     import tkinter.messagebox as msgBox
 except ImportError:
@@ -37,9 +37,9 @@ if TkVersion < 8.5:
 
 
 try:
-    from tkinter.ttk import Style, Label, Button, Combobox, Entry
+    from tkinter.ttk import Style, Label, Button, Combobox, Entry, Scrollbar
 except ImportError:
-    from ttk import Style, Label, Button, Combobox, Entry
+    from ttk import Style, Label, Button, Combobox, Entry, Scrollbar
 
 try:
     import json
