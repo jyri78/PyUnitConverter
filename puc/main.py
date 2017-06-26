@@ -68,6 +68,7 @@ class Main(puc.Frame):
 
 
     def change_lang(self):
+        '''Changes frames language.'''
         self.lblTitle.config(text = puc.messages["program.title"])
         self.lblLang.config(text = puc.lang["lang"])
         self.btnConvert.config(text = puc.messages["main.button.convert"])
