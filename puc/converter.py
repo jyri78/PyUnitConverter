@@ -14,10 +14,8 @@ class Converter(puc.Frame):
 
         self.controller = controller
 
-        # Some variables used in methods
-        self.unit_lists = []
-        self.unit_tos = []
-        self.unit_froms = []
+        # Variable used in methods (values of comboboxes)
+        self.uCombos = {"lists": [], "tos": [], "froms": []}
 
         # Variable for remembering selections
         self.selected = {"list": None, "to": None, "from": None}
@@ -146,7 +144,7 @@ class Converter(puc.Frame):
 
     def reset_units_list(self):
         """Resets units list combobox."""
-        self.controller.set_selections(self.unit_lists, self.cmbUnitsList,
+        self.controller.set_selections(self.uCombos["lists"], self.cmbUnitsList,
                                        self.controller.data)
 
     def units_list_selected(self, evt):
@@ -165,10 +163,10 @@ class Converter(puc.Frame):
         self.cmbFrom.current(None)
         self.selected["from"] = None
 
-        self.controller.set_selections(self.unit_tos, self.cmbTo,
+        self.controller.set_selections(self.uCombos["tos"], self.cmbTo,
                                        self.controller.data[self.selected["list"]])
 
-        self.controller.set_selections(self.unit_froms, self.cmbFrom,
+        self.controller.set_selections(self.uCombos["froms"], self.cmbFrom,
                                        self.controller.data[self.selected["list"]])
 
     def to_selected(self, evt):
