@@ -52,6 +52,15 @@ except: pass
 
 from glob import glob
 
+# Read in existing languages codes
+langs = []
+lngs = glob("./lang/*.py")
+for l in lngs:
+    # Accept only two letter languages
+    langs += [l[-5:-3]]
+langs = sorted(langs)
+
+
 # Python 2 and 3
 from io import open
 from os.path import exists
