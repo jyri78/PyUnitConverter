@@ -138,26 +138,35 @@ class Program(puc.Tk):
     # Methods for different frames of GUI (repeated actions)
     # -------------------------------------------------------------------------
 
-    def set_selections(self, selections: list, combo: puc.Combobox, data: dict):
+    def set_selections(self, selections: list, combo: puc.Combobox, data: dict, translate = False):
         """Adds selections to the combobox.
 
         Parameters:
             selections: list for selections
             combo: combobox where to add selections
             data: dictionary from where to get selections
+            translate: try to translate words or not
         """
         selections = []
         if data:
-            # For selections we use dictionary keys
-            for d in data:
-                if d != "base_unit":
-                    selections += [d]
+            lng = puc.settings["lang"]
+
+            if translate and lng in self.u_langs["translations"]:
+                # For selections we use dictionary keys
+                for d in data:
+                    if d != "base_unit":
+                        selections += [self.u_langs["translations"][lng][d] \
+                                       if d in self.u_langs["translations"][lng] else d]
+            else:
+                for d in data:
+                    if d != "base_unit":
+                        selections += [d]
 
         # Finally adds sorted list to the combobox
         combo["values"] = sorted(selections)
 
     def make_selection(self, selection: dict, sel: str, combo: puc.Combobox,
-                       status_text: str, no_status = False):
+                       status_text: str, no_status = False, translation = False):
         """Saves user selection and informs in statusbar if allowed.
 
         Parameters:
@@ -165,7 +174,29 @@ class Program(puc.Tk):
             combo: combobox where selection was made
             status_text: text to show in statusbar
             no_status: don't add text to the statusbar
+            translation: there is potentially translated word
         """
-        selection[sel] = combo.get()
+        word = combo.get()
+        if translation:
+            transl = False
+
+            # Figure out if word is translation
+            if not word in self.data:
+                transl = True
+                for list in self.data:
+                    if word in self.data[list]:
+                        transl = False
+                        break
+
+            # If word is translated, then find original key
+            if transl:
+                for key, val in self.u_langs["translations"][puc.settings["lang"]].items():
+                    if val == word:
+                        word = key
+                        break
+
+        selection[sel] = word
+
         if not no_status:
-            self.statusbar.set_status(puc.messages[status_text] + selection[sel].lower())
+            # In statusbar show original, translated text
+            self.statusbar.set_status(puc.messages[status_text] + combo.get().lower())
