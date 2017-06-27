@@ -146,12 +146,12 @@ class Converter(puc.Frame):
     def reset_units_list(self):
         """Resets units list combobox."""
         self.controller.set_selections(self.uCombos["lists"], self.cmbUnitsList,
-                                       self.controller.data)
+                                       self.controller.data, True)
 
     def units_list_selected(self, evt):
         """Unit list selection (resets units combobox)."""
         self.controller.make_selection(self.selected, "list", self.cmbUnitsList,
-                                       "status.selected_list", evt=="")
+                                       "status.selected_list", evt=="", True)
         self.reset_units()
 
 
@@ -165,19 +165,19 @@ class Converter(puc.Frame):
         self.selected["from"] = None
 
         self.controller.set_selections(self.uCombos["tos"], self.cmbTo,
-                                       self.controller.data[self.selected["list"]])
+                                       self.controller.data[self.selected["list"]], True)
 
         self.controller.set_selections(self.uCombos["froms"], self.cmbFrom,
-                                       self.controller.data[self.selected["list"]])
+                                       self.controller.data[self.selected["list"]], True)
 
     def to_selected(self, evt):
         """To unit selection (make calculation automatically)."""
         self.controller.make_selection(self.selected, "to", self.cmbTo,
-                                       "status.selected_to", evt=="")
+                                       "status.selected_to", evt=="", True)
         self.calc()
 
     def from_selected(self, evt):
         """From unit selection (make calculation automatically)."""
         self.controller.make_selection(self.selected, "from", self.cmbFrom,
-                                       "status.selected_from", evt=="")
+                                       "status.selected_from", evt=="", True)
         self.calc()
