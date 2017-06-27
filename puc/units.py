@@ -15,9 +15,8 @@ class Units(puc.Frame):
         self.controller = controller
         self.data_change = False  # if there has been made change in data
 
-        # Some variables used in methods
-        self.unit_lists = []
-        self.units = []
+        # Variable used in methods (values of comboboxes)
+        self.uCombos = {"lists": [], "units": []}
 
         # Variable for remembering selections
         self.selected = {"list": None, "unit": None}
@@ -169,7 +168,7 @@ class Units(puc.Frame):
         self.btnCancel.grid(row=6, column=3, padx=20, pady=20, sticky="se")
 
         # Reset units list combobox
-        self.controller.set_selections(self.unit_lists, self.cmbUnitsList, self.controller.data)
+        self.controller.set_selections(self.uCombos["lists"], self.cmbUnitsList, self.controller.data)
         if controller.df_exists:
             self.cmbUnitsList.current(0) # select first element
             self.units_list_selected("")
@@ -270,7 +269,7 @@ class Units(puc.Frame):
     def add_units_list(self):
         """Adds new unit to the combobox."""
         in_val = self.add_selection(self.txtUnitsList, self.controller.data,
-                                    self.unit_lists, self.cmbUnitsList,
+                                    self.uCombos["lists"], self.cmbUnitsList,
                                     self.btnAddUnitsList, "list")
 
         base = self.txtBaseUnit.get().strip().lower()
@@ -296,7 +295,7 @@ class Units(puc.Frame):
         self.cmbUnits.set("")
         self.cmbUnits.current(None)
 
-        self.controller.set_selections(self.units, self.cmbUnits,
+        self.controller.set_selections(self.uCombos["units"], self.cmbUnits,
                                        self.controller.data[self.selected["list"]])
 
         self.txtUnit.state(["!disabled"])
@@ -319,7 +318,7 @@ class Units(puc.Frame):
         """Adds new unit to the combobox."""
         self.add_selection(self.txtUnit,
                            self.controller.data[self.selected["list"]],
-                           self.units, self.cmbUnits,
+                           self.uCombos["units"], self.cmbUnits,
                            self.btnAddUnit, "unit", 0)
 
         self.unit_selected("")
