@@ -35,7 +35,7 @@ class Program(puc.Tk):
         # Set some variables needed in program
         self.df_exists = puc.exists(puc.datafile)
         self.data = {}
-        self.u_langs = {}
+        self.u_langs = {"lang": puc.settings["lang"], "translations": {}}
         self.frames = {}
         self.unsaved = False
 
@@ -59,11 +59,6 @@ class Program(puc.Tk):
                 self.u_langs["translations"] = self.data["translations"]
                 self.data = self.data["units"]
         else:
-            if puc.db_file_ver[-1:] != "":
-                self.u_langs = {
-                    "units_lang": puc.settings["lang"],
-                    "translations": {}}
-
             self.statusbar.set_status(puc.messages["status.no_datafile"])
 
         # Load all frames in to variable
