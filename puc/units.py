@@ -282,7 +282,7 @@ class Units(puc.Frame):
         self.txtUnit.delete(0, puc.END)
         self.txtUnit.insert(0, base)
         self.add_unit()
-        self.controller.data[self.selected_["list"]][self.selected["unit"]] = 1.0
+        self.controller.data[self.selected["list"]][self.selected["unit"]] = 1.0
         self.txtMultiplier.delete(0, puc.END)
         self.txtMultiplier.insert(0, "1,0" if puc.lang["flPoint_comma"] else "1.0")
 
