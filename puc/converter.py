@@ -150,6 +150,7 @@ class Converter(puc.Frame):
 
     def units_list_selected(self, evt):
         """Unit list selection (resets units combobox)."""
+        self.lblResult["text"] = ""
         self.controller.make_selection(self.selected, "list", self.cmbUnitsList,
                                        "status.selected_list", evt=="", True)
         self.reset_units()
