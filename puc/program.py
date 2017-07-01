@@ -102,7 +102,7 @@ class Program(puc.Tk):
             data = {
                 "units_lang": self.u_langs["lang"],
                 "units": self.data,
-                "translations": self.u_langs[""]}
+                "translations": self.u_langs["translations"]}
         else:
             data = self.data
 
