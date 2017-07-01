@@ -343,9 +343,10 @@ class Units(puc.Frame):
             self.controller.unsaved = True
             self.enable_btnSave()
 
-        # If there are no datafile, then now conversion button in main frame
-        # can be enabled
+        # If there are no datafile, then now conversion and translation button
+        # in main frame can be enabled
         self.controller.get_frame(puc.Main).btnConvert.state(["!disabled"])
+        self.controller.get_frame(puc.Main).btnTranslation.state(["!disabled"])
 
         self.controller.statusbar.set_status(
             puc.messages["status.added_multiplier"] + s_number)
