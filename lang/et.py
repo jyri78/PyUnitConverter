@@ -40,6 +40,7 @@ messages = {
     "button.add":     "Lisa",
     "button.change":  "Lisa/Muuda",
     "button.cancel":  "Lõpeta",
+    "button.save":    "Salvesta",
 
     # Frame texts
     "main.button.convert":  "Mõõtühikute teisendaja",
@@ -54,5 +55,4 @@ messages = {
     "units.label.converter":   "Mõõtühiku teisendus",
     "units.label.unit":        "Mõõtühik",
     "units.label.multiplier":  "Kordaja",
-    "units.button.save":       "Salvesta",
     }
