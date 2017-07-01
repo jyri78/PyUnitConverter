@@ -54,11 +54,14 @@ class Program(puc.Tk):
             self.data = puc.read_data(puc.datafile)
 
             # If database file version >1, then make some conversions
-            if puc.db_file_ver[-1:] != "":
+            if "db_ver" in self.data and self.data["db_ver"]>1:
+                puc.db_file_ver = self.data["db_ver"]
                 self.u_langs["lang"] = self.data["units_lang"]
                 self.u_langs["translations"] = self.data["translations"]
                 self.data = self.data["units"]
         else:
+            # TODO: uncomment next line (when translation module ready)
+            #puc.db_file_ver = 2  # Set default saving version (newer)
             self.statusbar.set_status(puc.messages["status.no_datafile"])
 
         # Load all frames in to variable
@@ -98,8 +101,9 @@ class Program(puc.Tk):
 
     def save_data(self):
         """Saves data to the file."""
-        if puc.db_file_ver[-1:] != "":
+        if puc.db_file_ver > 1:
             data = {
+                "db_ver": puc.db_file_ver,
                 "units_lang": self.u_langs["lang"],
                 "units": self.data,
                 "translations": self.u_langs["translations"]}
