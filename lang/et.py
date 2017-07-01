@@ -43,10 +43,11 @@ messages = {
     "button.save":    "Salvesta",
 
     # Frame texts
-    "main.button.convert":  "Mõõtühikute teisendaja",
-    "main.button.units":    "Lisa/Muuda mõõtühikuid",
-    "main.button.save":     "Salvesta andmed",
-    "main.button.about":    "Programmist",
+    "main.button.convert":    "Mõõtühikute teisendaja",
+    "main.button.units":      "Lisa/Muuda mõõtühikuid",
+    "main.button.translate":  "Tõlgi mõõtühikud",
+    "main.button.save":       "Salvesta andmed",
+    "main.button.about":      "Programmist",
 
     "converter.button.calc":  "Arvuta",
 
@@ -55,4 +56,7 @@ messages = {
     "units.label.converter":   "Mõõtühiku teisendus",
     "units.label.unit":        "Mõõtühik",
     "units.label.multiplier":  "Kordaja",
+
+    "translation.label.to_lang":      "Keelele",
+    "translation.label.translation":  "Tõlge",
     }
