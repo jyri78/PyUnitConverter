@@ -60,8 +60,7 @@ class Program(puc.Tk):
                 self.u_langs["translations"] = self.data["translations"]
                 self.data = self.data["units"]
         else:
-            # TODO: uncomment next line (when translation module ready)
-            #puc.db_file_ver = 2  # Set default saving version (newer)
+            puc.db_file_ver = 2  # Set default saving version (newer)
             self.statusbar.set_status(puc.messages["status.no_datafile"])
 
         # Load all frames in to variable
