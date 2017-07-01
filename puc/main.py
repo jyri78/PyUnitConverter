@@ -25,6 +25,14 @@ class Main(puc.Frame):
             text = puc.messages["main.button.convert"],
             command = lambda: controller.show_frame(puc.Converter))
 
+        self.btnTranslation = puc.Button(
+            self,
+            text = puc.messages["main.button.translate"],
+            command = lambda: controller.show_frame(puc.Translation))
+
+        if puc.db_file_ver == 1 or not controller.df_exists:
+            self.btnTranslation.state(["disabled"])
+
         self.btnUnits = puc.Button(self, text = puc.messages["main.button.units"],
                                    command = lambda: controller.show_frame(puc.Units))
 
@@ -52,13 +60,14 @@ class Main(puc.Frame):
 
         # Finally show labels and buttons (adds to the grid)
         self.lblTitle.grid(row=0, column=0, columnspan=3, padx=10, pady=10, sticky="nw")
-        self.cmbLang.grid(row=0, column=3, padx=20, sticky="se")
+        self.cmbLang.grid(row=0, column=3, padx=20, sticky="es")
         self.lblLang.grid(row=1, column=3, padx=20, sticky="ne")
-        self.btnConvert.grid(row=2, column=0, padx=10, pady=15, sticky="we")
-        self.btnUnits.grid(row=2, column=1, padx=10, pady=15, sticky="we")
-        self.btnSave.grid(row=2, column=3, padx=20, pady=15, sticky="we")
-        self.btnAbout.grid(row=3, column=1, padx=10, pady=35, sticky="swe")
-        self.btnClose.grid(row=3, column=3, padx=20, pady=35, sticky="se")
+        self.btnConvert.grid(row=2, column=0, padx=10, sticky="ew")
+        self.btnUnits.grid(row=3, column=0, padx=10, pady=15, sticky="ew")
+        self.btnTranslation.grid(row=3, column=1, padx=10, pady=15, sticky="ew")
+        self.btnSave.grid(row=3, column=3, padx=20, pady=15, sticky="ew")
+        self.btnAbout.grid(row=4, column=1, padx=10, pady=35, sticky="esw")
+        self.btnClose.grid(row=4, column=3, padx=20, pady=35, sticky="es")
 
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
@@ -73,6 +82,7 @@ class Main(puc.Frame):
         self.lblLang.config(text = puc.lang["lang"])
         self.btnConvert.config(text = puc.messages["main.button.convert"])
         self.btnUnits.config(text = puc.messages["main.button.units"])
+        self.btnTranslation.config(text = puc.messages["main.button.translate"])
         self.btnSave.config(text = puc.messages["main.button.save"])
         self.btnAbout.config(text = puc.messages["main.button.about"])
         self.btnClose.config(text = puc.messages["button.close"])
