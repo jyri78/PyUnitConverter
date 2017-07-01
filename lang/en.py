@@ -40,6 +40,7 @@ messages = {
     "button.add":     "Add",
     "button.change":  "Add/Change",
     "button.cancel":  "Cancel",
+    "button.save":    "Save",
 
     # Frame texts
     "main.button.convert":  "Unit Converter",
@@ -54,5 +55,4 @@ messages = {
     "units.label.converter":   "Unit converter",
     "units.label.unit":        "Unit",
     "units.label.multiplier":  "Multiplier",
-    "units.button.save":       "Save",
     }
