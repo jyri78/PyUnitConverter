@@ -105,6 +105,7 @@ class Translation(puc.Frame):
         self.lblLang.config(text = puc.messages["translation.label.to_lang"])
         self.lblTranslation.config(text = puc.messages["translation.label.translation"])
         self.btnUpdate.config(text = puc.messages["button.change"])
+        self.btnSave.config(text = puc.messages["button.save"])
         self.btnCancel.config(text = puc.messages["button.cancel"])
 
 
