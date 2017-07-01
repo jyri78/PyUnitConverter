@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2017-06-30
+### Added
+- Units translation frame.
+- In converter frame units are translated if applicable.
+
+### Changed
+- Elements grid in frames are now visually more appealing.
+- Datafile (ver. 2) now supports multilingual unit names.
+- Many similar variables moved to the one dict variable.
+
+### Fixed
+- In converter frame result field is not cleared after units list selection.
+
 ## [1.0.2] - 2017-06-13
 ### Added
 - Active language name to the main frame.
