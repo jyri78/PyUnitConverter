@@ -122,7 +122,7 @@ class Units(puc.Frame):
         # Buttons
         # ----------------------------------------------------------------------
 
-        self.btnSave = puc.Button(self, text = puc.messages["units.button.save"],
+        self.btnSave = puc.Button(self, text = puc.messages["button.save"],
                                   command = self.save_data)
         self.btnSave.state(["disabled"])
 
@@ -191,7 +191,7 @@ class Units(puc.Frame):
         self.btnAddUnit.config(text = puc.messages["button.add"])
         self.lblMultiplier.config(text = puc.messages["units.label.multiplier"])
         self.btnAddMultiplier.config(text = puc.messages["button.change"])
-        self.btnSave.config(text = puc.messages["units.button.save"])
+        self.btnSave.config(text = puc.messages["button.save"])
         self.btnCancel.config(text = puc.messages["button.cancel"])
 
 
