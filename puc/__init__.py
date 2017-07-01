@@ -81,7 +81,7 @@ saving_modes = [False, False]
 settings_file = "PyUnitConverter.json"
 puc_icon = "./puc/puc.ico"
 db_filename = "units"
-db_file_ver = ""
+db_file_ver = 1 # default (original) datafile version
 datafile = ""
 
 
@@ -170,7 +170,6 @@ def run():
 
     # Set datafile full name
     if saving_modes[settings["saving_mode"]] :
-        datafile = db_filename + db_file_ver \
-                + messages["program.ext"][settings["saving_mode"]]
+        datafile = db_filename + messages["program.ext"][settings["saving_mode"]]
 
     Program().mainloop()
