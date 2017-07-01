@@ -69,6 +69,7 @@ from os.path import exists
 from puc.main import *
 from puc.converter import *
 from puc.units import *
+from puc.translation import *
 from puc.statusbar import *
 from puc.program import *
 
