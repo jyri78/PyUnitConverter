@@ -43,10 +43,11 @@ messages = {
     "button.save":    "Save",
 
     # Frame texts
-    "main.button.convert":  "Unit Converter",
-    "main.button.units":    "Add/Change Units",
-    "main.button.save":     "Save data",
-    "main.button.about":    "About",
+    "main.button.convert":    "Unit Converter",
+    "main.button.units":      "Add/Change Units",
+    "main.button.translate":  "Translate Units",
+    "main.button.save":       "Save data",
+    "main.button.about":      "About",
 
     "converter.button.calc":  "Calc",
 
@@ -55,4 +56,7 @@ messages = {
     "units.label.converter":   "Unit converter",
     "units.label.unit":        "Unit",
     "units.label.multiplier":  "Multiplier",
+
+    "translation.label.to_lang":      "To language",
+    "translation.label.translation":  "Translation",
     }
