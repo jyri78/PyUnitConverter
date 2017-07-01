@@ -64,7 +64,7 @@ class Program(puc.Tk):
             self.statusbar.set_status(puc.messages["status.no_datafile"])
 
         # Load all frames in to variable
-        for F in (puc.Main, puc.Converter, puc.Units):
+        for F in (puc.Main, puc.Converter, puc.Units, puc.Translation):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
